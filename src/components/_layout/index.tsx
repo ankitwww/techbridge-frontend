@@ -1,115 +1,252 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogPanel } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { Footer } from "../footer";
-
-const navigation = [
-  { name: "Mentors", href: "#" },
-  { name: "Projects", href: "#" },
-  { name: "About Us", href: "#" },
-];
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState("");
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      navigate("/search"); // Replace with the route of the next page
+    }
+  };
   return (
     <>
-      <div className="bg-white">
-        <header className="absolute inset-x-0 top-0 z-50">
-          <nav
-            aria-label="Global"
-            className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
-          >
-            <div className="flex lg:flex-1">
-              <a href="/" className="-m-1.5 p-1.5">
-                <span className="sr-only">YVR Techbridge</span>
-                <img alt="" src="/logo.webp" className="h-8 w-auto" />
-              </a>
-            </div>
-            <div className="flex lg:hidden">
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(true)}
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-              >
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon aria-hidden="true" className="h-6 w-6" />
-              </button>
-            </div>
-            <div className="hidden lg:flex lg:gap-x-12">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-              <a
-                href="#"
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
-                Log in <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </nav>
-          <Dialog
-            open={mobileMenuOpen}
-            onClose={setMobileMenuOpen}
-            className="lg:hidden"
-          >
-            <div className="fixed inset-0 z-50" />
-            <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-              <div className="flex items-center justify-between">
-                <a href="#" className="-m-1.5 p-1.5">
-                  <span className="sr-only">Your Company</span>
+      <Disclosure as="nav" className="bg-white shadow">
+        <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+          <div className="flex h-16 justify-between">
+            <div className="flex px-2 lg:px-0">
+              <div className="flex flex-shrink-0 items-center">
+                <a href="/">
                   <img
-                    alt=""
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    alt="YVR TechBridge"
+                    src="/logo.webp"
                     className="h-8 w-auto"
                   />
                 </a>
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="-m-2.5 rounded-md p-2.5 text-gray-700"
-                >
-                  <span className="sr-only">Close menu</span>
-                  <XMarkIcon aria-hidden="true" className="h-6 w-6" />
-                </button>
               </div>
-              <div className="mt-6 flow-root">
-                <div className="-my-6 divide-y divide-gray-500/10">
-                  <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+              <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
+                {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
+                <a
+                  href="/"
+                  className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
+                >
+                  Home
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                >
+                  Mentors
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                >
+                  Projects
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                >
+                  About Us
+                </a>
+              </div>
+            </div>
+            <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
+              <div className="w-full max-w-lg lg:max-w-xs">
+                <label htmlFor="search" className="sr-only">
+                  Search
+                </label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <MagnifyingGlassIcon
+                      aria-hidden="true"
+                      className="h-5 w-5 text-gray-400"
+                    />
                   </div>
-                  <div className="py-6">
-                    <a
-                      href="#"
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      Log in
-                    </a>
-                  </div>
+                  <input
+                    id="search"
+                    name="search"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    type="search"
+                    placeholder="Search local experts, courses"
+                    className="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
                 </div>
               </div>
-            </DialogPanel>
-          </Dialog>
-        </header>
+            </div>
+            <div className="flex items-center lg:hidden">
+              {/* Mobile menu button */}
+              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <span className="absolute -inset-0.5" />
+                <span className="sr-only">Open main menu</span>
+                <Bars3Icon
+                  aria-hidden="true"
+                  className="block h-6 w-6 group-data-[open]:hidden"
+                />
+                <XMarkIcon
+                  aria-hidden="true"
+                  className="hidden h-6 w-6 group-data-[open]:block"
+                />
+              </DisclosureButton>
+            </div>
+            <div className="hidden lg:ml-4 lg:flex lg:items-center">
+              <button
+                type="button"
+                className="relative flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">View notifications</span>
+                <BellIcon aria-hidden="true" className="h-6 w-6" />
+              </button>
+
+              {/* Profile dropdown */}
+              <Menu as="div" className="relative ml-4 flex-shrink-0">
+                <div>
+                  <MenuButton className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">Open user menu</span>
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-500">
+                      <span className="font-medium leading-none text-white">
+                        AK
+                      </span>
+                    </span>
+                  </MenuButton>
+                </div>
+                <MenuItems
+                  transition
+                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                >
+                  <MenuItem>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
+                    >
+                      Your Profile
+                    </a>
+                  </MenuItem>
+                  <MenuItem>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
+                    >
+                      Settings
+                    </a>
+                  </MenuItem>
+                  <MenuItem>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
+                    >
+                      Sign out
+                    </a>
+                  </MenuItem>
+                </MenuItems>
+              </Menu>
+            </div>
+          </div>
+        </div>
+
+        <DisclosurePanel className="lg:hidden">
+          <div className="space-y-1 pb-3 pt-2">
+            {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
+            <DisclosureButton
+              as="a"
+              href="#"
+              className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700"
+            >
+              Dashboard
+            </DisclosureButton>
+            <DisclosureButton
+              as="a"
+              href="#"
+              className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+            >
+              Team
+            </DisclosureButton>
+            <DisclosureButton
+              as="a"
+              href="#"
+              className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+            >
+              Projects
+            </DisclosureButton>
+            <DisclosureButton
+              as="a"
+              href="#"
+              className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
+            >
+              Calendar
+            </DisclosureButton>
+          </div>
+          <div className="border-t border-gray-200 pb-3 pt-4">
+            <div className="flex items-center px-4">
+              <div className="flex-shrink-0">
+                <img
+                  alt=""
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  className="h-10 w-10 rounded-full"
+                />
+              </div>
+              <div className="ml-3">
+                <div className="text-base font-medium text-gray-800">
+                  Tom Cook
+                </div>
+                <div className="text-sm font-medium text-gray-500">
+                  tom@example.com
+                </div>
+              </div>
+              <button
+                type="button"
+                className="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">View notifications</span>
+                <BellIcon aria-hidden="true" className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="mt-3 space-y-1">
+              <DisclosureButton
+                as="a"
+                href="#"
+                className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+              >
+                Your Profile
+              </DisclosureButton>
+              <DisclosureButton
+                as="a"
+                href="#"
+                className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+              >
+                Settings
+              </DisclosureButton>
+              <DisclosureButton
+                as="a"
+                href="#"
+                className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+              >
+                Sign out
+              </DisclosureButton>
+            </div>
+          </div>
+        </DisclosurePanel>
         <div>
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
@@ -118,8 +255,8 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             return child;
           })}
         </div>
-      </div>
-      <Footer />
+        <Footer />
+      </Disclosure>
     </>
   );
 };
