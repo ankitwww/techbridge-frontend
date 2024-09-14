@@ -1,7 +1,18 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "./components/_layout";
+import { Home } from "./components/home";
 
-function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+export default function App() {
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <Home />
+          </Layout>
+        }
+      />
+    </Routes>
+  );
 }
-
-export default App;
