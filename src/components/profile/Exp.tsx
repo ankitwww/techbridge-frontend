@@ -1,8 +1,8 @@
 const projects = [
   {
     id: 1,
-    name: "GraphQL API",
-    href: "#",
+    name: "Menotring React",
+    text: "Working Since",
     status: "Complete",
     createdBy: "Leslie Alexander",
     dueDate: "March 17, 2023",
@@ -11,7 +11,7 @@ const projects = [
   {
     id: 2,
     name: "New benefits plan",
-    href: "#",
+    text: "Working Since",
     status: "In progress",
     createdBy: "Leslie Alexander",
     dueDate: "May 5, 2023",
@@ -20,17 +20,13 @@ const projects = [
   {
     id: 3,
     name: "Onboarding emails",
-    href: "#",
+    text: "Working Since",
     status: "In progress",
     createdBy: "Courtney Henry",
     dueDate: "May 25, 2023",
     dueDateTime: "2023-05-25T00:00Z",
   },
 ];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export const Experience = () => {
   return (
@@ -45,24 +41,11 @@ export const Experience = () => {
               <p className="text-sm font-semibold leading-6 text-gray-900">
                 {project.name}
               </p>
-              <p
-                className={classNames(
-                  "completed",
-                  "mt-0.5 whitespace-nowrap rounded-md px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset"
-                )}
-              >
-                {project.status}
-              </p>
             </div>
             <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
               <p className="whitespace-nowrap">
-                Due on{" "}
-                <time dateTime={project.dueDateTime}>{project.dueDate}</time>
+                <time dateTime={project.dueDateTime}>{project.text}</time>
               </p>
-              <svg viewBox="0 0 2 2" className="h-0.5 w-0.5 fill-current">
-                <circle r={1} cx={1} cy={1} />
-              </svg>
-              <p className="truncate">Created by {project.createdBy}</p>
             </div>
           </div>
         </li>
