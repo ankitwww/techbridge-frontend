@@ -4,10 +4,11 @@ export const MainProfileCard = () => {
   const people = [
     {
       name: "Leslie Alexander",
-      role: "Sr. Software Engineer, Pixel",
+      role: "Sr. Software Engineer, Pixel since 2023",
+      pastRole: "Ex-Amazon, Ex-Microsoft",
       imageUrl:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-      bio: "Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.",
+      bio: " Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.",
       xUrl: "#",
       linkedinUrl: "#",
     },
@@ -33,8 +34,9 @@ export const MainProfileCard = () => {
               {person.name}
             </h3>
             <p className="text-base leading-7 text-gray-600">{person.role}</p>
+            <p className="text-base leading-7 text-gray-600"></p>
             <p className="mt-6 text-base leading-7 text-gray-600">
-              {person.bio}
+              <b>{person.pastRole}</b>.{person.bio}
             </p>
             <ul role="list" className="mt-6 flex gap-x-6">
               <li>

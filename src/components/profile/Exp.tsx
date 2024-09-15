@@ -1,8 +1,8 @@
 const projects = [
   {
     id: 1,
-    name: "Menotring React",
-    text: "Working Since",
+    name: "Teaching advanced React",
+    text: "Taught 200+ students in YVR",
     status: "Complete",
     createdBy: "Leslie Alexander",
     dueDate: "March 17, 2023",
@@ -10,8 +10,8 @@ const projects = [
   },
   {
     id: 2,
-    name: "New benefits plan",
-    text: "Working Since",
+    name: "Built React-ARIA components",
+    text: "Downloaded 10K+ times",
     status: "In progress",
     createdBy: "Leslie Alexander",
     dueDate: "May 5, 2023",
@@ -19,8 +19,8 @@ const projects = [
   },
   {
     id: 3,
-    name: "Onboarding emails",
-    text: "Working Since",
+    name: "Mentored 25 professionals",
+    text: "Mentoring since 2022",
     status: "In progress",
     createdBy: "Courtney Henry",
     dueDate: "May 25, 2023",
